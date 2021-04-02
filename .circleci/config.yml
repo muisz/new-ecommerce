@@ -4,18 +4,45 @@ orbs:
   python: circleci/python@0.2.1
 
 jobs:
-  build-and-test:
-    executor: python/default
+  build-and-run:
+    docker:
+      - image: circleci/python:3.7
+        auth:
+          username: $DOCKER_ID
+          password: $DOCKER_PASSWORD
+      
+      - image: circleci/mysql:8.0
+        auth:
+          username: $DOCKER_ID
+          password: $DOCKER_PASSWORD
+        environment:
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: testing
+          MYSQL_DATABASE: ecommerce
+    
     steps:
       - checkout
-      - python/load-cache
-      - python/install-deps
-      - python/save-cache
       - run:
-          command: ./manage.py test
-          name: Test
+          name: "Install Dependencies"
+          command: |
+            sudo pip install -r requirements.txt
+      - run:
+          name: "Running Server"
+          command: |
+            python manage.py runserver
+  
+  test:
+    steps:
+      - run:
+          name: "Testing API"
+          command: |
+            python manage.py test
+
 
 workflows:
   main:
     jobs:
       - build-and-test
+      - test:
+        requires:
+          - build-and-test
