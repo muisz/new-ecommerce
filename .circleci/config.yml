@@ -16,7 +16,7 @@ jobs:
           username: $DOCKER_ID
           password: $DOCKER_PASSWORD
         environment:
-          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: ecommerce
     
     steps:
