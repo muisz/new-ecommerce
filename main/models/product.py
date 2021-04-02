@@ -1,6 +1,7 @@
 from django.db import models
 
 class Items(models.Model):
+    shop_id = models.IntegerField(null=True)
     name = models.CharField(max_length = 100)
     price = models.FloatField()
     description = models.TextField()
@@ -76,7 +77,7 @@ class Shops(models.Model):
     name = models.CharField(max_length=100, unique=True)
     bio = models.TextField(null = True, blank = True)
     url = models.CharField(max_length=100)
-    rating = models.FloatField()
+    rating = models.FloatField(default=0)
     date_created = models.DateField(auto_now_add = True)
     time_created = models.TimeField(auto_now_add = True)
 
