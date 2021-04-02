@@ -33,7 +33,7 @@ jobs:
       - run:
           name: "Alter mysql user"
           command: |
-            mysql -u root -p root
+            sudo mysql -u root -p root
             ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'
       - run:
           name: "Install dependencies"
