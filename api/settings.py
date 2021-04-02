@@ -135,3 +135,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = [os.path.join(BASE_DIR, 'media')]
+
+MAIN_HOST = env.str('HOST', default='http://127.0.0.1:8000')
