@@ -31,6 +31,11 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - run:
+          name: "Alter mysql user"
+          command: |
+            mysql -u root -p root
+            ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root'
+      - run:
           name: "Install dependencies"
           command: |
             sudo pip install -r requirements.txt
