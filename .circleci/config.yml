@@ -34,3 +34,7 @@ jobs:
           name: "Install dependencies"
           command: |
             sudo pip install -r requirements.txt
+      - run:
+          name: "Test app"
+          command: |
+            python manage.py test
